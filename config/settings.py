@@ -1,0 +1,24 @@
+# CONFIGURAÇÕES GERAIS
+
+APP_NAME = "EOM - Extrator de Chaves NF"
+APP_VERSION = "1.1.0"
+
+# Servidor local
+HOST = "127.0.0.1"
+PORT = 5000
+
+# Janela desktop
+WINDOW_TITLE = APP_NAME
+
+WINDOW_WIDTH = 380
+WINDOW_HEIGHT = 520
+
+WINDOW_MIN_WIDTH = 340
+WINDOW_MIN_HEIGHT = 450
+
+# Comportamento
+WINDOW_ON_TOP = True
+WINDOW_RESIZABLE = True
+
+# Inicialização
+AUTO_OPEN = True

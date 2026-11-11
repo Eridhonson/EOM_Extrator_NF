@@ -1,25 +1,31 @@
+
 const entrada = document.getElementById("entrada");
 const resultado = document.getElementById("resultado");
 const contador = document.getElementById("contador");
 
 const btnProcessar = document.getElementById("btnProcessar");
 const btnCopiar = document.getElementById("btnCopiar");
-const btnColar = document.getElementById("btnColar");
 const btnLimpar = document.getElementById("btnLimpar");
+const btnFechar = document.getElementById("btnFechar");
 
 
-// Processar texto
+// Colar e extrair números
 btnProcessar.addEventListener("click", async () => {
-
-    const texto = entrada.value;
-
-    if (!texto.trim()) {
-        alert("Insira um texto primeiro.");
-        return;
-    }
 
     try {
 
+        // Lê a área de transferência
+        const texto = await navigator.clipboard.readText();
+
+        if (!texto.trim()) {
+            alert("A área de transferência está vazia.");
+            return;
+        }
+
+        // Substitui o texto anterior
+        entrada.value = texto;
+
+        // Envia para processamento
         const resposta = await fetch("/api/processar", {
             method: "POST",
 
@@ -38,6 +44,7 @@ btnProcessar.addEventListener("click", async () => {
             throw new Error(dados.erro || "Erro no processamento.");
         }
 
+        // Exibe o resultado
         resultado.value = dados.resultado;
 
         contador.textContent =
@@ -45,7 +52,10 @@ btnProcessar.addEventListener("click", async () => {
 
     } catch (erro) {
 
-        alert("Não foi possível processar o texto: " + erro.message);
+        alert(
+            "Não foi possível colar e processar o texto. " +
+            "Verifique a permissão da área de transferência."
+        );
 
     }
 
@@ -72,31 +82,7 @@ btnCopiar.addEventListener("click", async () => {
 
     } catch (erro) {
 
-        alert("Não foi possível acessar a área de transferência.");
-
-    }
-
-});
-
-
-// Colar texto substituindo o conteúdo anterior
-btnColar.addEventListener("click", async () => {
-
-    try {
-
-        const texto = await navigator.clipboard.readText();
-
-        entrada.value = texto;
-
-        resultado.value = "";
-
-        contador.textContent = "0 números";
-
-        entrada.focus();
-
-    } catch (erro) {
-
-        alert("Não foi possível acessar a área de transferência. Verifique a permissão do navegador.");
+        alert("Não foi possível copiar o resultado.");
 
     }
 
@@ -114,9 +100,6 @@ btnLimpar.addEventListener("click", () => {
     entrada.focus();
 
 });
-
-
-const btnFechar = document.getElementById("btnFechar");
 
 
 // Encerrar aplicação
