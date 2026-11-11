@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EOM | Extrator de Chaves NF</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+            <div class="logo">EOM</div>
+
+            <div>
+                <h1>Extrator de Chaves NF</h1>
+                <p>Extração rápida de números de notas fiscais</p>
+            </div>
+        </header>
+
+
+        <section class="card">
+
+            <label for="entrada">Texto original</label>
+
+            <textarea
+                id="entrada"
+                placeholder="Cole aqui o texto da nota fiscal..."
+            ></textarea>
+
+            <div class="botoes">
+
+                <button id="btnColar" class="btn secundario">
+                    Colar
+                </button>
+
+                <button id="btnProcessar" class="btn principal">
+                    Extrair números
+                </button>
+
+                <button id="btnLimpar" class="btn perigo">
+                    Limpar
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="card resultado-card">
+
+            <div class="titulo-resultado">
+                <label for="resultado">Resultado</label>
+                <span id="contador">0 números</span>
+            </div>
+
+            <textarea
+                id="resultado"
+                readonly
+                placeholder="O resultado aparecerá aqui..."
+            ></textarea>
+
+            <button id="btnCopiar" class="btn principal copiar">
+                Copiar resultado
+            </button>
+
+            
+            <button id="btnFechar" class="btn perigo fechar">
+                Encerrar programa
+            </button>
+
+        </section>
+
+
+        <footer>
+            EOM — Ferramentas e soluções personalizadas
+            <span>Processamento local</span>
+        </footer>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

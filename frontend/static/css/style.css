@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f4f8;
+    color: #1e293b;
+    min-height: 100vh;
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.logo {
+    background: #172554;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 17px;
+    border-radius: 12px;
+}
+
+.header h1 {
+    font-size: 23px;
+    margin-bottom: 5px;
+}
+
+.header p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    resize: vertical;
+    padding: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 15px;
+    outline: none;
+    line-height: 1.6;
+}
+
+textarea:focus {
+    border-color: #2563eb;
+}
+
+textarea:read-only {
+    background: #f8fafc;
+}
+
+.botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    border: none;
+    padding: 13px 18px;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    filter: brightness(0.92);
+}
+
+.principal {
+    background: #2563eb;
+    color: white;
+}
+
+.secundario {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.perigo {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.titulo-resultado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#contador {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.copiar {
+    width: 100%;
+    margin-top: 15px;
+}
+
+footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    padding: 15px;
+}
+
+footer span {
+    display: block;
+    margin-top: 5px;
+}
+
+@media (max-width: 500px) {
+
+    .header h1 {
+        font-size: 19px;
+    }
+
+    .botoes {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .card {
+        padding: 18px;
+    }
+}
+
+.fechar {
+    width: 100%;
+    margin-top: 10px;
+    background: #991b1b;
+    color: white;
+}
+
+.fechar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
