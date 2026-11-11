@@ -1,4 +1,4 @@
-# Projeto: EOM – Extrator de Chaves NF
+# Extrator de Chaves NF
 
 *Nome:* EOM – Extrator de Chaves NF
 
@@ -28,9 +28,6 @@
 *Status inicial:* Planejamento e desenvolvimento da versão 1.0.
 
 # CONTROLE DE VERSÕES
-=====================
-## FEITO
-v1.0.3
 
 1.0.1 — Inicialização oculta com iniciar_oculto.vbs.
 
