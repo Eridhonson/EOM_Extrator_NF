@@ -30,18 +30,18 @@
 # CONTROLE DE VERSÕES
 =====================
 ## FEITO
-1.0.1 Adicionado o arquivo iniciar_oculto.vbs que inicia o programa sem abrir a tela do .bat (mais amigável para o usuário final)
+v1.0.3
 
-CÓDIGO ADICIONADO - ARQUIVO iniciar_oculto.vbs:
-Set shell = CreateObject("WScript.Shell")
-scriptDir = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName)
-shell.Run """" & scriptDir & "\iniciar.bat" & """", 0, False
+1.0.1 — Inicialização oculta com iniciar_oculto.vbs.
 
-1.0.2 Removido a opção de pause do iniciar.bat
+1.0.2 — Remoção do pause do arquivo iniciar.bat.
 
-ALTERAÇÃO NO CÓDIGO:
+1.0.3 — Botão de encerramento da aplicação.
 
-REM pause
+- Encerramento controlado do servidor Python.
 
-## PARA FAZER
-1.0.3 Adicionar um botão de Fechar para encerrar o processo, agora que o iniciar.bat não fica mais aberto.
+- Confirmação antes de sair.
+
+- Mensagem de encerramento no navegador.
+
+- Finalização do processo sem intervenção manual.
