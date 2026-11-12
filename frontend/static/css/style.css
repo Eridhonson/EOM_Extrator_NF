@@ -1,73 +1,120 @@
+/*
+========================================
+EOM - EXTRATOR DE CHAVES NF
+Versão: 1.1.1
+Alteração: Interface compacta e responsiva
+Descrição:
+- Redução de espaçamentos.
+- Redimensionamento dos campos.
+- Otimização dos botões.
+- Adaptação para janelas pequenas.
+- Ajustes para telas com pouca altura.
+========================================
+*/
+
+/* ==============================
+   CONFIGURAÇÕES GERAIS
+============================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: #f1f4f8;
     color: #1e293b;
+
     min-height: 100vh;
-    padding: 30px 15px;
+    min-height: 100dvh;
+
+    padding: 10px;
 }
 
 .container {
-    max-width: 760px;
+    width: 100%;
+    max-width: 480px;
     margin: 0 auto;
 }
+
+/* ==============================
+   CABEÇALHO
+============================== */
 
 .header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .logo {
     background: #172554;
     color: white;
-    font-size: 24px;
+    font-size: 19px;
     font-weight: bold;
-    padding: 17px;
-    border-radius: 12px;
+    padding: 11px;
+    border-radius: 9px;
+    flex-shrink: 0;
 }
 
 .header h1 {
-    font-size: 23px;
-    margin-bottom: 5px;
+    font-size: 18px;
+    margin-bottom: 3px;
 }
 
 .header p {
     color: #64748b;
-    font-size: 14px;
+    font-size: 12px;
 }
+
+/* ==============================
+   CARTÕES
+============================== */
 
 .card {
     background: white;
-    padding: 24px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 label {
     display: block;
     font-weight: bold;
-    margin-bottom: 12px;
+    font-size: 13px;
+    margin-bottom: 7px;
 }
 
+/* ==============================
+   CAMPOS DE TEXTO
+============================== */
+
 textarea {
+    display: block;
     width: 100%;
-    min-height: 150px;
-    resize: vertical;
-    padding: 15px;
+
+    min-height: 0;
+    resize: none;
+
+    padding: 9px;
+
     border: 1px solid #cbd5e1;
-    border-radius: 8px;
+    border-radius: 7px;
+
     font-family: monospace;
-    font-size: 15px;
+    font-size: 13px;
+    line-height: 1.4;
+
     outline: none;
-    line-height: 1.6;
 }
 
 textarea:focus {
@@ -78,24 +125,56 @@ textarea:read-only {
     background: #f8fafc;
 }
 
+/* Campo de entrada */
+
+#entrada {
+    height: 85px;
+}
+
+/* Campo de resultado */
+
+#resultado {
+    height: 55px;
+    font-size: 12px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+/* ==============================
+   BOTÕES
+============================== */
+
 .botoes {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
+
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .btn {
+    flex: 1;
+
     border: none;
-    padding: 13px 18px;
+    padding: 10px 12px;
+
     border-radius: 7px;
+
+    font-size: 12px;
     font-weight: bold;
+
     cursor: pointer;
     transition: 0.2s;
 }
 
 .btn:hover {
     filter: brightness(0.92);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .principal {
@@ -113,56 +192,36 @@ textarea:read-only {
     color: #b91c1c;
 }
 
+/* ==============================
+   RESULTADO
+============================== */
+
 .titulo-resultado {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
 }
 
 #contador {
     color: #64748b;
-    font-size: 12px;
+    font-size: 11px;
+    white-space: nowrap;
 }
 
 .copiar {
     width: 100%;
-    margin-top: 15px;
+    margin-top: 8px;
 }
 
-footer {
-    text-align: center;
-    color: #64748b;
-    font-size: 12px;
-    padding: 15px;
-}
-
-footer span {
-    display: block;
-    margin-top: 5px;
-}
-
-@media (max-width: 500px) {
-
-    .header h1 {
-        font-size: 19px;
-    }
-
-    .botoes {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-    }
-
-    .card {
-        padding: 18px;
-    }
-}
+/* ==============================
+   ENCERRAMENTO
+============================== */
 
 .fechar {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 8px;
+
     background: #991b1b;
     color: white;
 }
@@ -170,4 +229,94 @@ footer span {
 .fechar:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+/* ==============================
+   RODAPÉ
+============================== */
+
+footer {
+    text-align: center;
+    color: #64748b;
+
+    font-size: 10px;
+    padding: 5px;
+}
+
+footer span {
+    display: block;
+    margin-top: 3px;
+}
+
+/* ==============================
+   TELAS MUITO PEQUENAS
+============================== */
+
+@media (max-width: 350px) {
+
+    body {
+        padding: 7px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 16px;
+    }
+
+    .logo {
+        font-size: 16px;
+        padding: 9px;
+    }
+
+    .btn {
+        padding: 9px 7px;
+        font-size: 11px;
+    }
+
+    #entrada {
+        height: 75px;
+    }
+
+    #resultado {
+        height: 50px;
+    }
+}
+
+/* ==============================
+   JANELAS COM POUCA ALTURA
+============================== */
+
+@media (max-height: 480px) {
+
+    body {
+        padding: 6px;
+    }
+
+    .header {
+        margin-bottom: 6px;
+    }
+
+    .logo {
+        padding: 7px;
+    }
+
+    .card {
+        padding: 9px;
+        margin-bottom: 6px;
+    }
+
+    #entrada {
+        height: 65px;
+    }
+
+    #resultado {
+        height: 45px;
+    }
+
+    footer {
+        padding: 3px;
+    }
 }
