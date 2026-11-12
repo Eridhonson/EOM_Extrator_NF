@@ -27,6 +27,40 @@ class AplicacaoAPI:
             "status": "encerramento solicitado"
         }
 
+    # ========================================
+    # ÁREA DE TRANSFERÊNCIA
+    # ========================================
+
+    def obter_texto_area_transferencia(self):
+
+        import pyperclip
+
+        try:
+            return pyperclip.paste()
+
+        except Exception as erro:
+            raise RuntimeError(
+                f"Falha ao ler a área de transferência: {erro}"
+            )
+
+
+    def copiar_texto(self, texto):
+
+        import pyperclip
+
+        try:
+            pyperclip.copy(texto)
+
+            return {
+                "status": "texto copiado"
+            }
+
+        except Exception as erro:
+            raise RuntimeError(
+                f"Falha ao copiar o texto: {erro}"
+            )
+
+
 
 def iniciar_aplicacao():
 
