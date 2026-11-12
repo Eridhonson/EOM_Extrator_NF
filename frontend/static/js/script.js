@@ -9,12 +9,14 @@ const btnLimpar = document.getElementById("btnLimpar");
 const btnFechar = document.getElementById("btnFechar");
 
 
-// Colar e extrair números
+// ========================================
+// COLAR E EXTRAIR NÚMEROS
+// ========================================
+
 btnProcessar.addEventListener("click", async () => {
 
     try {
 
-        // Lê a área de transferência
         const texto = await navigator.clipboard.readText();
 
         if (!texto.trim()) {
@@ -22,10 +24,8 @@ btnProcessar.addEventListener("click", async () => {
             return;
         }
 
-        // Substitui o texto anterior
         entrada.value = texto;
 
-        // Envia para processamento
         const resposta = await fetch("/api/processar", {
             method: "POST",
 
@@ -41,10 +41,11 @@ btnProcessar.addEventListener("click", async () => {
         const dados = await resposta.json();
 
         if (!resposta.ok) {
-            throw new Error(dados.erro || "Erro no processamento.");
+            throw new Error(
+                dados.erro || "Erro no processamento."
+            );
         }
 
-        // Exibe o resultado
         resultado.value = dados.resultado;
 
         contador.textContent =
@@ -52,9 +53,11 @@ btnProcessar.addEventListener("click", async () => {
 
     } catch (erro) {
 
+        console.error("Erro ao processar:", erro);
+
         alert(
-            "Não foi possível colar e processar o texto. " +
-            "Verifique a permissão da área de transferência."
+            "Não foi possível colar e processar o texto.\n\n" +
+            erro.message
         );
 
     }
@@ -62,7 +65,10 @@ btnProcessar.addEventListener("click", async () => {
 });
 
 
-// Copiar resultado
+// ========================================
+// COPIAR RESULTADO
+// ========================================
+
 btnCopiar.addEventListener("click", async () => {
 
     if (!resultado.value) {
@@ -72,7 +78,9 @@ btnCopiar.addEventListener("click", async () => {
 
     try {
 
-        await navigator.clipboard.writeText(resultado.value);
+        await navigator.clipboard.writeText(
+            resultado.value
+        );
 
         btnCopiar.textContent = "Copiado!";
 
@@ -82,14 +90,22 @@ btnCopiar.addEventListener("click", async () => {
 
     } catch (erro) {
 
-        alert("Não foi possível copiar o resultado.");
+        console.error("Erro ao copiar:", erro);
+
+        alert(
+            "Não foi possível copiar o resultado.\n\n" +
+            erro.message
+        );
 
     }
 
 });
 
 
-// Limpar campos
+// ========================================
+// LIMPAR CAMPOS
+// ========================================
+
 btnLimpar.addEventListener("click", () => {
 
     entrada.value = "";
@@ -102,7 +118,61 @@ btnLimpar.addEventListener("click", () => {
 });
 
 
-// Encerrar aplicação
+// ========================================
+// AGUARDAR API DO PYWEBVIEW
+// ========================================
+
+function aguardarPywebview() {
+
+    return new Promise((resolve, reject) => {
+
+        if (window.pywebview && window.pywebview.api) {
+            resolve(window.pywebview.api);
+            return;
+        }
+
+        const timeout = setTimeout(() => {
+
+            reject(
+                new Error(
+                    "A API do pywebview não foi disponibilizada."
+                )
+            );
+
+        }, 5000);
+
+        window.addEventListener(
+            "pywebviewready",
+            () => {
+
+                clearTimeout(timeout);
+
+                if (
+                    window.pywebview &&
+                    window.pywebview.api
+                ) {
+                    resolve(window.pywebview.api);
+                } else {
+                    reject(
+                        new Error(
+                            "Não foi possível acessar a API Python."
+                        )
+                    );
+                }
+
+            },
+            { once: true }
+        );
+
+    });
+
+}
+
+
+// ========================================
+// ENCERRAR APLICAÇÃO
+// ========================================
+
 btnFechar.addEventListener("click", async () => {
 
     const confirmar = confirm(
@@ -118,29 +188,33 @@ btnFechar.addEventListener("click", async () => {
 
     try {
 
-        const resposta = await fetch("/api/encerrar", {
-            method: "POST"
-        });
+        console.log("Solicitando encerramento...");
 
-        if (!resposta.ok) {
-            throw new Error("Falha ao encerrar.");
+        const api = await aguardarPywebview();
+
+        console.log("API Python encontrada:", api);
+
+        const resposta = await api.encerrar_aplicacao();
+
+        console.log("Resposta do Python:", resposta);
+
+        if (
+            !resposta ||
+            resposta.status !== "encerramento solicitado"
+        ) {
+            throw new Error(
+                "O Python não confirmou a solicitação de encerramento."
+            );
         }
-
-        document.body.innerHTML = `
-            <main style="
-                text-align: center;
-                padding: 80px 20px;
-                font-family: Arial, sans-serif;
-            ">
-                <h2>Programa encerrado!</h2>
-                <p>Você pode fechar esta aba do navegador.</p>
-                <p>EOM - Extrator de Chaves NF</p>
-            </main>
-        `;
 
     } catch (erro) {
 
-        alert("Não foi possível encerrar o programa.");
+        console.error("Erro ao encerrar aplicação:", erro);
+
+        alert(
+            "Não foi possível encerrar o programa.\n\n" +
+            erro.message
+        );
 
         btnFechar.disabled = false;
         btnFechar.textContent = "Encerrar programa";
