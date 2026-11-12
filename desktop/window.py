@@ -1,3 +1,4 @@
+
 import webview
 
 from config.settings import (
@@ -11,22 +12,20 @@ from config.settings import (
 )
 
 
-def criar_janela(url):
+def criar_janela(url, js_api=None):
 
     janela = webview.create_window(
         title=WINDOW_TITLE,
         url=url,
-
         width=WINDOW_WIDTH,
         height=WINDOW_HEIGHT,
-
         min_size=(
             WINDOW_MIN_WIDTH,
             WINDOW_MIN_HEIGHT
         ),
-
         on_top=WINDOW_ON_TOP,
-        resizable=WINDOW_RESIZABLE
+        resizable=WINDOW_RESIZABLE,
+        js_api=js_api
     )
 
     return janela
