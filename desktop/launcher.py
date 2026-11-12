@@ -1,3 +1,4 @@
+
 import threading
 import webview
 
@@ -7,6 +8,24 @@ from backend.app import app
 from desktop.window import criar_janela
 
 from config.settings import HOST, PORT
+
+
+class AplicacaoAPI:
+
+    def __init__(self):
+        self.janela = None
+
+    def definir_janela(self, janela):
+        self.janela = janela
+
+    def encerrar_aplicacao(self):
+
+        if self.janela is not None:
+            self.janela.destroy()
+
+        return {
+            "status": "encerramento solicitado"
+        }
 
 
 def iniciar_aplicacao():
@@ -26,7 +45,16 @@ def iniciar_aplicacao():
 
     url = f"http://{HOST}:{PORT}"
 
-    janela = criar_janela(url)
+    # Cria a API Python
+    api = AplicacaoAPI()
+
+    # Cria a janela com acesso à API
+    janela = criar_janela(
+        url,
+        js_api=api
+    )
+
+    api.definir_janela(janela)
 
     try:
 
@@ -37,8 +65,8 @@ def iniciar_aplicacao():
         servidor.shutdown()
         servidor.server_close()
 
-def encerrar_aplicacao(self):
-    if self.janela is not None:
-        self.janela.destroy()
+        thread.join(timeout=2)
 
-    return {"status": "encerramento solicitado"}
+
+if __name__ == "__main__":
+    iniciar_aplicacao()
