@@ -36,3 +36,9 @@ def iniciar_aplicacao():
 
         servidor.shutdown()
         servidor.server_close()
+
+def encerrar_aplicacao(self):
+    if self.janela is not None:
+        self.janela.destroy()
+
+    return {"status": "encerramento solicitado"}
