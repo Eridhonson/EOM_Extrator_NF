@@ -18,21 +18,11 @@ class AplicacaoAPI:
     def definir_janela(self, janela):
         self.janela = janela
 
-    def encerrar_aplicacao(self):
-
-        if self.janela is not None:
-            self.janela.destroy()
-
-        return {
-            "status": "encerramento solicitado"
-        }
-
     # ========================================
     # ÁREA DE TRANSFERÊNCIA
     # ========================================
 
     def obter_texto_area_transferencia(self):
-
         import pyperclip
 
         try:
@@ -43,9 +33,7 @@ class AplicacaoAPI:
                 f"Falha ao ler a área de transferência: {erro}"
             )
 
-
     def copiar_texto(self, texto):
-
         import pyperclip
 
         try:
@@ -59,6 +47,15 @@ class AplicacaoAPI:
             raise RuntimeError(
                 f"Falha ao copiar o texto: {erro}"
             )
+
+    def encerrar_aplicacao(self):
+
+        if self.janela is not None:
+            self.janela.destroy()
+
+        return {
+            "status": "encerramento solicitado"
+        }
 
 
 
