@@ -1,7 +1,7 @@
 # CONFIGURAÇÕES GERAIS
 
 APP_NAME = "EOM - Extrator de Chaves NF"
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.1.2"
 
 # Servidor local
 HOST = "127.0.0.1"
